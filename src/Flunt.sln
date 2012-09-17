@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flunt.Data", "Flunt.Data\Flunt.Data.csproj", "{FBA4B67D-D22D-4123-B026-7A5A175845FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flunt.Data.Tests", "Flunt.Data.Tests\Flunt.Data.Tests.csproj", "{58B6684D-9CEC-49F5-9B2F-EAF69950637B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBA4B67D-D22D-4123-B026-7A5A175845FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA4B67D-D22D-4123-B026-7A5A175845FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA4B67D-D22D-4123-B026-7A5A175845FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA4B67D-D22D-4123-B026-7A5A175845FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
