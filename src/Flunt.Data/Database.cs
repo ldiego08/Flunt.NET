@@ -24,6 +24,11 @@ namespace Flunt.Data
             get { return this._dataProvider; }
         }
 
+        public string ConnectionStringOrName
+        {
+            get { return this._connectionStringOrName; }
+        }
+
         #endregion
 
         #region Constructors
@@ -46,6 +51,9 @@ namespace Flunt.Data
         /// <returns>The resulting database context.</returns>
         public Database UsingConnection(string connectionStringOrName)
         {
+            if (String.IsNullOrEmpty(connectionStringOrName))
+                throw new ArgumentException("Connection string or name cannot be null or empty.");
+
             this._connectionStringOrName = connectionStringOrName;
 
             return this;

@@ -36,12 +36,15 @@ namespace Flunt.Data
 
         #region Constructors
 
-        protected DatabaseCommandExpression(string text, Database database)
+        protected DatabaseCommandExpression(string queryText, Database database)
         {
+            if (String.IsNullOrEmpty(queryText))
+                throw new ArgumentException("Query text cannot be null or empty");
+
             this._database = database;
             this._command = _database.Factory.CreateCommand();
 
-            this._command.CommandText = text;
+            this._command.CommandText = queryText;
             this._command.CommandType = CommandType.Text;
 
             this._parameterExpressions = new List<DatabaseCommandParameterExpression>();
@@ -114,12 +117,12 @@ namespace Flunt.Data
         /// <summary>
         /// Creates a command expression for the specified query.
         /// </summary>
-        /// <param name="text">The query the command will execute.</param>
+        /// <param name="queryText">The query the command will execute.</param>
         /// <param name="database">The data provider used to create connections and other database objects.</param>
         /// <returns>The resulting command expression.</returns>
-        public static DatabaseCommandExpression For(string text, Database database)
+        public static DatabaseCommandExpression For(string queryText, Database database)
         {
-            return new DatabaseCommandExpression(text, database);
+            return new DatabaseCommandExpression(queryText, database);
         } 
 
         #endregion
