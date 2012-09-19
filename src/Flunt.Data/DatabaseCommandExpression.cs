@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 
 namespace Flunt.Data
 {
@@ -62,9 +63,20 @@ namespace Flunt.Data
         /// <returns>The resulting command expression.</returns>
         public DatabaseCommandExpression Where(string parameterName, Action<DatabaseCommandParameterExpression> expression)
         {
+            if (String.IsNullOrEmpty(parameterName))
+                throw new ArgumentException("The parameter name cannot be null or empty.");
+
+            if (expression == null)
+                throw new ArgumentNullException("expression");
+
             var parameterExpression = DatabaseCommandParameterExpression.For(parameterName, this._database);
 
             expression(parameterExpression);
+
+            var existingExpression = this._parameterExpressions.SingleOrDefault(exp => exp.Compiled().ParameterName == parameterExpression.Compiled().ParameterName);
+
+            if (existingExpression != null)
+                this._parameterExpressions.Remove(existingExpression);
 
             this._parameterExpressions.Add(parameterExpression);
 
@@ -77,6 +89,8 @@ namespace Flunt.Data
         /// <returns>The resulting data reader expression.</returns>
         public DatabaseDataReaderExpression AsReader()
         {
+            ParseCommandParameters();
+
             return DatabaseDataReaderExpression.For(this._command, this._database);
         }
 
@@ -86,6 +100,8 @@ namespace Flunt.Data
         /// <returns>The number of rows affected.</returns>
         public int AsNonQuery()
         {
+            ParseCommandParameters();
+
             using (var connection = this._database.Factory.CreateConnection())
             {
                 this._command.Connection = connection;
@@ -98,11 +114,22 @@ namespace Flunt.Data
         }
 
         /// <summary>
+        /// Gets the System.Data.Common.DbCommand resulting from this expression.
+        /// </summary>
+        /// <returns>The resulting System.Data.Common.DbCommand.</returns>
+        public DbCommand Compiled()
+        {
+            return this._command;
+        }
+
+        /// <summary>
         /// Executes the resulting command as a scalar value.
         /// </summary>
         /// <returns>The resulting value expression.</returns>
         public DatabaseCommandValueExpression AsScalar()
         {
+            ParseCommandParameters();
+
             using (var connection = this._database.Factory.CreateConnection())
             {
                 this._command.Connection = connection;
@@ -124,6 +151,14 @@ namespace Flunt.Data
         {
             return new DatabaseCommandExpression(queryText, database);
         } 
+
+        private void ParseCommandParameters()
+        {
+            this._command.Parameters.Clear();
+
+            foreach (var parameterExpression in this._parameterExpressions)
+                this._command.Parameters.Add(parameterExpression.Compiled());
+        }
 
         #endregion
     }

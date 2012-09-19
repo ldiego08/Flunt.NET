@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="WhenDatabaseIsInitialized.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WhenExecutingQueriesOnDatabase.cs" />
+    <Compile Include="WhenCreatingDatabaseQueries.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

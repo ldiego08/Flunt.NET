@@ -94,6 +94,15 @@ namespace Flunt.Data
         }
 
         /// <summary>
+        /// Gets the compiled System.Data.Common.DbParameter resulting from this expression.
+        /// </summary>
+        /// <returns>The resulting System.Data.Common.DbParameter.</returns>
+        public DbParameter Compiled()
+        {
+            return this._parameter;
+        }
+
+        /// <summary>
         /// Creates a command parameter.
         /// </summary>
         /// <param name="name">The name of the parameter.</param>
