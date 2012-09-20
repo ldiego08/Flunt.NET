@@ -105,6 +105,34 @@ namespace Flunt.Data.Tests
         }
 
         [Test]
+        public void ItShouldThrowExceptionIfParameterNameIsNullOrEmpty()
+        {
+            // Arrange
+            var dataProviderMock = new Mock<DbProviderFactory>();
+            var dataCommandMock = new Mock<DbCommand>();
+            var dataParameterMock = new Mock<DbParameter>();
+
+            var databaseContext = Database.ForProvider(dataProviderMock.Object);
+
+            dataProviderMock.Setup(c => c.CreateCommand())
+                            .Returns(dataCommandMock.Object);
+
+            dataProviderMock.Setup(c => c.CreateParameter())
+                            .Returns(dataParameterMock.Object);
+
+            TestDelegate nullParameterNameInitializer;
+            TestDelegate emptyParameterNameInitializer;
+
+            // Act
+            nullParameterNameInitializer = new TestDelegate(() => databaseContext.Execute("SELECT * FROM Table").Where(null, p => p.Is(1)));
+            emptyParameterNameInitializer = new TestDelegate(() => databaseContext.Execute("SELECT * FROM Table").Where(String.Empty, p => p.Is(1)));
+
+            // Assert
+            Assert.That(nullParameterNameInitializer, Throws.Exception);
+            Assert.That(emptyParameterNameInitializer, Throws.Exception);
+        }
+
+        [Test]
         public void ItShouldThrowExceptionIfParameterExpressionArgumentsAreNull()
         {
             // Arrange
@@ -121,18 +149,12 @@ namespace Flunt.Data.Tests
                             .Returns(dataParameterMock.Object);
 
             TestDelegate nullExpressionParameterSetter;
-            TestDelegate nullNameParameterSetter;
-            TestDelegate emptyNameParameterSetter;
 
             // Act
             nullExpressionParameterSetter = new TestDelegate(() => databaseContext.Execute("SELECT * FROM Table").Where("Id", null));
-            nullNameParameterSetter = new TestDelegate(() => databaseContext.Execute("SELECT * FROM Table").Where(null, p => p.Is(1)));
-            emptyNameParameterSetter = new TestDelegate(() => databaseContext.Execute("SELECT * FROM Table").Where(String.Empty, p => p.Is(1)));
             
             // Assert
             Assert.That(nullExpressionParameterSetter, Throws.Exception);
-            Assert.That(nullNameParameterSetter, Throws.Exception);
-            Assert.That(emptyNameParameterSetter, Throws.Exception);
         }
     }
 }

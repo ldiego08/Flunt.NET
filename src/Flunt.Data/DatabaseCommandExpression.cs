@@ -63,9 +63,6 @@ namespace Flunt.Data
         /// <returns>The resulting command expression.</returns>
         public DatabaseCommandExpression Where(string parameterName, Action<DatabaseCommandParameterExpression> expression)
         {
-            if (String.IsNullOrEmpty(parameterName))
-                throw new ArgumentException("The parameter name cannot be null or empty.");
-
             if (expression == null)
                 throw new ArgumentNullException("expression");
 

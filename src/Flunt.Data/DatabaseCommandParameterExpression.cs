@@ -60,6 +60,9 @@ namespace Flunt.Data
         /// <returns>The resulting command parameter expression.</returns>
         public DatabaseCommandParameterExpression WithSize(int size)
         {
+            if (size < 0)
+                throw new ArgumentException("Parametes value size must be a number equal or greater then zero.");
+
             this._parameter.Size = size;
             return this;
         }
@@ -71,6 +74,9 @@ namespace Flunt.Data
         /// <returns>The resulting command parameter expression.</returns>
         public DatabaseCommandParameterExpression WithOptions(Action<DatabaseCommandParameterOptions> predicate)
         {
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
+
             var parameterOptions = new DatabaseCommandParameterOptions();
 
             predicate(parameterOptions);
