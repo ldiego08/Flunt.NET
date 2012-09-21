@@ -13,7 +13,7 @@ namespace Flunt.Data
     {
         #region Fields
 
-        private readonly DbCommand _command;
+        private readonly IDbCommand _command;
         private readonly Database _database;
         private readonly IList<DatabaseCommandParameterExpression> _parameterExpressions;
 
@@ -114,7 +114,7 @@ namespace Flunt.Data
         /// Gets the System.Data.Common.DbCommand resulting from this expression.
         /// </summary>
         /// <returns>The resulting System.Data.Common.DbCommand.</returns>
-        public DbCommand Compiled()
+        public IDbCommand Compiled()
         {
             return this._command;
         }

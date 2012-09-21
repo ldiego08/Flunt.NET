@@ -13,13 +13,13 @@ namespace Flunt.Data
 
         private string _connectionStringOrName;
 
-        private readonly DbProviderFactory _dataProvider;
+        private readonly IDataObjectsFactory _dataProvider;
 
         #endregion
 
         #region Properties
 
-        public DbProviderFactory Factory
+        public IDataObjectsFactory Factory
         {
             get { return this._dataProvider; }
         }
@@ -33,9 +33,7 @@ namespace Flunt.Data
 
         #region Constructors
 
-        private Database(string providerName) : this(DbProviderFactories.GetFactory(providerName)) { }
-
-        private Database(DbProviderFactory dataProvider)
+        private Database(IDataObjectsFactory dataProvider)
         {
             this._dataProvider = dataProvider;
         }
@@ -86,15 +84,17 @@ namespace Flunt.Data
         /// <returns>The Flunt.Data.Database created.</returns>
         public static Database ForProvider(string providerName) 
         {
-            return new Database(providerName);
+            var innerDataObjectsFactory = DbProviderFactories.GetFactory(providerName);
+
+            return new Database(new DataObjectsFactory(innerDataObjectsFactory));
         }
 
         /// <summary>
         /// Creates a database context for the specified data provider.
         /// </summary>
-        /// <param name="dataProvider">The System.Data.Common.DbProviderFactory instance used by the database context.</param>
+        /// <param name="dataProvider">The Flunt.Data.IDataObjectFactory instance used by the database context.</param>
         /// <returns>The Flunt.Data.Database created.</returns>
-        public static Database ForProvider(DbProviderFactory dataProvider) 
+        public static Database ForProvider(IDataObjectsFactory dataProvider) 
         {
             return new Database(dataProvider);
         }
@@ -114,7 +114,9 @@ namespace Flunt.Data
             if (connectionString == null)
                 throw new ConfigurationErrorsException(String.Format("The connection string with name {0} was not found in the application configuration.", connectionStringName));
 
-            return new Database(connectionString.ProviderName);
+            var innerDataObjectsFactory = DbProviderFactories.GetFactory(connectionString.ProviderName);
+
+            return new Database(new DataObjectsFactory(innerDataObjectsFactory));
         }
 
         protected string ResolveConnectionString()

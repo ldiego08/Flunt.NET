@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.Common;
 
 namespace Flunt.Data
 {
@@ -11,7 +10,7 @@ namespace Flunt.Data
     {
         #region Fields
 
-        private readonly DbParameter _parameter;
+        private readonly IDbDataParameter _parameter;
         private readonly Database _database; 
 
         #endregion
@@ -81,8 +80,8 @@ namespace Flunt.Data
 
             predicate(parameterOptions);
 
+            this._parameter.Precision = parameterOptions.Precision;
             this._parameter.SourceColumn = parameterOptions.SourceColumn;
-            this._parameter.SourceColumnNullMapping = parameterOptions.SourceColumnNullMapping;
             this._parameter.SourceVersion = parameterOptions.SourceVersion;
 
             return this;
@@ -103,7 +102,7 @@ namespace Flunt.Data
         /// Gets the compiled System.Data.Common.DbParameter resulting from this expression.
         /// </summary>
         /// <returns>The resulting System.Data.Common.DbParameter.</returns>
-        public DbParameter Compiled()
+        public IDbDataParameter Compiled()
         {
             return this._parameter;
         }

@@ -49,6 +49,8 @@
     <Compile Include="DatabaseDataReaderExpression.cs" />
     <Compile Include="DatabaseCommandValueExpression.cs" />
     <Compile Include="DatabaseStoredProcedureExpression.cs" />
+    <Compile Include="DataObjectsFactory.cs" />
+    <Compile Include="IDataObjectsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

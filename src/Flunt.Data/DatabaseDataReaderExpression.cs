@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.Common;
+using System.Data;
 
 namespace Flunt.Data
 {
@@ -10,14 +10,14 @@ namespace Flunt.Data
     {
         #region Fields
 
-        private readonly DbCommand _command;
+        private readonly IDbCommand _command;
         private readonly Database _database; 
 
         #endregion
 
         #region Constructors
 
-        private DatabaseDataReaderExpression(DbCommand command, Database database)
+        private DatabaseDataReaderExpression(IDbCommand command, Database database)
         {
             this._command = command;
             this._database = database;
@@ -54,7 +54,7 @@ namespace Flunt.Data
         /// <param name="command">The command where the data reader is to be retrieved.</param>
         /// <param name="database">The data provider used to create connections and other database objects.</param>
         /// <returns>The resulting data reader expression.</returns>
-        public static DatabaseDataReaderExpression For(DbCommand command, Database database)
+        public static DatabaseDataReaderExpression For(IDbCommand command, Database database)
         {
             return new DatabaseDataReaderExpression(command, database);
         } 

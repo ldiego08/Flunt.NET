@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+﻿using System.Data;
 
 namespace Flunt.Data
 {
@@ -9,13 +9,13 @@ namespace Flunt.Data
     {
         #region Fields
 
-        private readonly DbDataReader _reader; 
+        private readonly IDataReader _reader; 
 
         #endregion
 
         #region Constructors
 
-        private DatabaseDataReaderRowExpression(DbDataReader reader)
+        private DatabaseDataReaderRowExpression(IDataReader reader)
         {
             this._reader = reader;
         } 
@@ -39,7 +39,7 @@ namespace Flunt.Data
         /// </summary>
         /// <param name="reader">The reader the values will be retrieved from.</param>
         /// <returns>The resulting reader row expression.</returns>
-        public static DatabaseDataReaderRowExpression For(DbDataReader reader)
+        public static DatabaseDataReaderRowExpression For(IDataReader reader)
         {
             return new DatabaseDataReaderRowExpression(reader);
         } 

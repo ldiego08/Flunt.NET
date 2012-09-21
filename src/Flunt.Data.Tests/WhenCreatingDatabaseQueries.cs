@@ -2,6 +2,7 @@
 using System.Data.Common;
 using Moq;
 using NUnit.Framework;
+using System.Data;
 
 namespace Flunt.Data.Tests
 {
@@ -14,18 +15,21 @@ namespace Flunt.Data.Tests
             // Arrange
             DatabaseCommandExpression expression;
 
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
             dataProviderMock.Setup(i => i.CreateCommand())
                             .Returns(dataCommandMock.Object);
+
+            dataCommandMock.SetupProperty(c => c.CommandText);
 
             // Act
             expression = databaseContext.Execute("SELECT * FROM dbo.Table");
 
             // Assert
             Assert.That(expression, Is.Not.Null);
+            Assert.That(expression.Compiled().CommandText, Is.EqualTo("SELECT * FROM dbo.Table"));
         }
 
         [Test]
@@ -35,7 +39,7 @@ namespace Flunt.Data.Tests
             TestDelegate nullQueryExpressionInitializer;
             TestDelegate emptyQueryExpressionInitializer;
 
-            var dataProviderMock = new Mock<DbProviderFactory>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
             // Act
@@ -51,9 +55,9 @@ namespace Flunt.Data.Tests
         public void ItShouldBeAbleToSetQueryParameter()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
             
@@ -79,9 +83,9 @@ namespace Flunt.Data.Tests
         public void ItShouldReplaceExistingQueryParameterWhenReset()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -108,9 +112,9 @@ namespace Flunt.Data.Tests
         public void ItShouldThrowExceptionIfParameterNameIsNullOrEmpty()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -136,9 +140,9 @@ namespace Flunt.Data.Tests
         public void ItShouldThrowExceptionIfParameterExpressionArgumentsAreNull()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -155,6 +159,53 @@ namespace Flunt.Data.Tests
             
             // Assert
             Assert.That(nullExpressionParameterSetter, Throws.Exception);
+        }
+
+        [Test]
+        public void ItShouldBeAbleToCreateProcedureExecutionExpression()
+        {
+            // Arrange
+            DatabaseCommandExpression expression;
+
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var databaseContext = Database.ForProvider(dataProviderMock.Object);
+
+            dataProviderMock.Setup(i => i.CreateCommand())
+                            .Returns(dataCommandMock.Object);
+
+            dataCommandMock.SetupProperty(c => c.CommandText);
+
+            // Act
+            expression = databaseContext.ExecuteProcedure("SP_Test");
+
+            // Assert
+            Assert.That(expression, Is.Not.Null);
+            Assert.That(expression.Compiled().CommandText, Is.EqualTo("SP_Test"));
+        }
+
+        [Test]
+        public void ItShouldBeAbleToExecuteQueryAsReader()
+        {
+            // Arrange
+            DatabaseDataReaderExpression expression;
+
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var databaseContext = Database.ForProvider(dataProviderMock.Object);
+
+            dataProviderMock.Setup(i => i.CreateCommand())
+                            .Returns(dataCommandMock.Object);
+
+            dataCommandMock.SetupProperty(c => c.CommandText);
+            dataCommandMock.SetupGet(c => c.Parameters)
+                           .Returns(new Mock<IDataParameterCollection>().Object);
+
+            // Act
+            expression = databaseContext.Execute("SELECT * FROM Table").AsReader();
+
+            // Assert
+            Assert.That(expression, Is.Not.Null);
         }
     }
 }

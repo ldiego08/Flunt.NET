@@ -26,8 +26,9 @@ namespace Flunt.Data.Tests
         { 
             // Arrange
             Database databaseContext;
-            Mock<DbProviderFactory> dataProviderMock = new Mock<DbProviderFactory>();
-            DbProviderFactory dataProvider = dataProviderMock.Object;
+
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataProvider = dataProviderMock.Object;
 
             // Act
             databaseContext = Database.ForProvider(dataProvider);

@@ -15,9 +15,9 @@ namespace Flunt.Data.Tests
         public void ItShouldBeAbleToChangeValueType()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -41,9 +41,9 @@ namespace Flunt.Data.Tests
         public void ItShouldBeAbleToSetValueSize()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -67,9 +67,9 @@ namespace Flunt.Data.Tests
         public void ItShouldThrowExceptionIfNameIsNullOrEmpty()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -96,9 +96,9 @@ namespace Flunt.Data.Tests
         public void ItShouldNotAddAtSymbolIfParameterNameAlreadyHasIt()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -124,9 +124,9 @@ namespace Flunt.Data.Tests
         public void ItShouldThrowExceptionIfValueSizeIsLessThanZero()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -149,9 +149,9 @@ namespace Flunt.Data.Tests
         public void ItShouldBeAbleToSetAdditonalOptions()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -161,8 +161,8 @@ namespace Flunt.Data.Tests
             dataProviderMock.Setup(c => c.CreateParameter())
                             .Returns(dataParameterMock.Object);
 
+            dataParameterMock.SetupProperty(c => c.Precision);
             dataParameterMock.SetupProperty(c => c.SourceColumn);
-            dataParameterMock.SetupProperty(c => c.SourceColumnNullMapping);
             dataParameterMock.SetupProperty(c => c.SourceVersion);
 
             var resultingParameter = dataParameterMock.Object;
@@ -171,14 +171,14 @@ namespace Flunt.Data.Tests
             var databaseCommand = databaseContext.Execute("SELECT * FROM Table")
                                                  .Where("Id", p => p.Is(1).WithOptions(opt =>
                                                  {
+                                                     opt.Precision = 0xFF;
                                                      opt.SourceColumn = "Id";
-                                                     opt.SourceColumnNullMapping = true;
                                                      opt.SourceVersion = DataRowVersion.Current;
                                                  }));
 
             // Assert
+            Assert.That(resultingParameter.Precision, Is.EqualTo(0xFF));
             Assert.That(resultingParameter.SourceColumn, Is.EqualTo("Id"));
-            Assert.That(resultingParameter.SourceColumnNullMapping, Is.True);
             Assert.That(resultingParameter.SourceVersion, Is.EqualTo(DataRowVersion.Current));
         }
 
@@ -186,9 +186,9 @@ namespace Flunt.Data.Tests
         public void ItShouldThrowExceptionIfOptionsPredicateIsNull()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -211,9 +211,9 @@ namespace Flunt.Data.Tests
         public void ItShouldBeAbleToSetDirectionToOutput()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
@@ -239,9 +239,9 @@ namespace Flunt.Data.Tests
         public void ItShouldBeAbleToCompileExpressionToNativeParameter()
         {
             // Arrange
-            var dataProviderMock = new Mock<DbProviderFactory>();
-            var dataCommandMock = new Mock<DbCommand>();
-            var dataParameterMock = new Mock<DbParameter>();
+            var dataProviderMock = new Mock<IDataObjectsFactory>();
+            var dataCommandMock = new Mock<IDbCommand>();
+            var dataParameterMock = new Mock<IDbDataParameter>();
 
             var databaseContext = Database.ForProvider(dataProviderMock.Object);
 
