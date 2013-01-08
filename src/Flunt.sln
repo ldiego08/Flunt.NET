@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flunt.Data", "Flunt.Data\Flunt.Data.csproj", "{FBA4B67D-D22D-4123-B026-7A5A175845FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flunt.Data.Tests", "Flunt.Data.Tests\Flunt.Data.Tests.csproj", "{58B6684D-9CEC-49F5-9B2F-EAF69950637B}"
@@ -11,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{86E71A
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flunt.Web.Mvc", "Flunt.Web.Mvc\Flunt.Web.Mvc.csproj", "{6A438CBB-884A-45C1-B113-594C8D99808E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flunt.Common", "Flunt.Common\Flunt.Common.csproj", "{5F671D24-5F5B-4AB3-9D48-3F30B8174AB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication1", "MvcApplication1\MvcApplication1.csproj", "{5328CC89-6602-4E7E-B4E1-A2115673B18A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +32,18 @@ Global
 		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58B6684D-9CEC-49F5-9B2F-EAF69950637B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A438CBB-884A-45C1-B113-594C8D99808E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A438CBB-884A-45C1-B113-594C8D99808E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A438CBB-884A-45C1-B113-594C8D99808E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A438CBB-884A-45C1-B113-594C8D99808E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F671D24-5F5B-4AB3-9D48-3F30B8174AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F671D24-5F5B-4AB3-9D48-3F30B8174AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F671D24-5F5B-4AB3-9D48-3F30B8174AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F671D24-5F5B-4AB3-9D48-3F30B8174AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5328CC89-6602-4E7E-B4E1-A2115673B18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5328CC89-6602-4E7E-B4E1-A2115673B18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5328CC89-6602-4E7E-B4E1-A2115673B18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5328CC89-6602-4E7E-B4E1-A2115673B18A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
