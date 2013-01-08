@@ -9,6 +9,8 @@ namespace Flunt.Web.Mvc
 {
     public interface IHtmlHelper
     {
+        dynamic ViewBag { get; }
+
         ViewContext ViewContext { get; }
     }
 }

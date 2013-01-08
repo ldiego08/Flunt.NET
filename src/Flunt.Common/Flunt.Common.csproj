@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComparisonExtensions.cs" />
+    <Compile Include="DynamicExtensions.cs" />
     <Compile Include="Empty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
