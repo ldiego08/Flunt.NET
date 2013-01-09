@@ -23,7 +23,7 @@
 
         #region Constructor
 
-        public InputHtmlElement(Expression<Func<TModel, TProperty>> propertySelector, IHtmlHelper<TModel> htmlHelper)
+        public InputHtmlElement(Expression<Func<TModel, TProperty>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
         {
             this.skipEditoRules = false;
@@ -83,11 +83,11 @@
         {
             get
             {
-                var viewBag = this.HtmlHelper.ViewBag as object;
+                var viewBag = this.HtmlHelper.InnerHelper.ViewBag as object;
 
                 if (viewBag.Has(ViewModePropertyName))
                 {
-                    return (EditorWebViewMode)this.HtmlHelper.ViewBag.ViewMode;
+                    return (EditorWebViewMode)this.HtmlHelper.InnerHelper.ViewBag.ViewMode;
                 }
                 else
                 {

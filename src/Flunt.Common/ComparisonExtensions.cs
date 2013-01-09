@@ -20,7 +20,23 @@ namespace System
 
         public static bool IsEqualTo(this object value, object other)
         {
-            return value.Equals(other);
+            if (other != null)
+            {
+                return other.Equals(value);
+            }
+            else if (value != null)
+            {
+                return value.Equals(other);
+            }
+            else
+            {
+                return value == other;
+            }
+        }
+
+        public static bool IsDifferentTo(this object value, object other)
+        {
+            return value.IsEqualTo(other).IsFalse();
         }
 
         public static bool IsNull(this object value)

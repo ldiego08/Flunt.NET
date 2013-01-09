@@ -3,19 +3,32 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    public class HtmlHelper : System.Web.Mvc.HtmlHelper
+    public class HtmlHelper
     {
+        #region Fields
+
+        private readonly System.Web.Mvc.HtmlHelper innerHtmlHelper;
+
+        #endregion
+
         #region Constructors
 
-        public HtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-            : base(viewContext, viewDataContainer)
+        public HtmlHelper(System.Web.Mvc.HtmlHelper innerHtmlHelper)
         {
+            this.innerHtmlHelper = innerHtmlHelper;
         }
 
-        public HtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection)
-            : base(viewContext, viewDataContainer, routeCollection)
+        #endregion
+
+        #region Properties
+
+        public System.Web.Mvc.HtmlHelper InnerHelper
         {
-        } 
+            get 
+            { 
+                return this.innerHtmlHelper; 
+            }
+        }
 
         #endregion
     }

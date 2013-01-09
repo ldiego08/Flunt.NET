@@ -2,10 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
-
+    
     public abstract class HtmlElement<THtmlHelper> : HtmlBlock<THtmlHelper>
-        where THtmlHelper : IHtmlHelper
+        where THtmlHelper : HtmlHelper
     {
         #region Constants
 

@@ -2,9 +2,8 @@
 {
     using System;
     using System.Linq.Expressions;
-    using System.Web.Mvc;
-
-    public abstract class HtmlElement<TModel, TProperty> : HtmlElement<IHtmlHelper<TModel>>
+    
+    public abstract class HtmlElement<TModel, TProperty> : HtmlElement<HtmlHelper<TModel>>
     {
         #region Fields
 
@@ -14,7 +13,7 @@
 
         #region Constructors
 
-        public HtmlElement(Expression<Func<TModel, TProperty>> propertySelector, IHtmlHelper<TModel> htmlHelper)
+        public HtmlElement(Expression<Func<TModel, TProperty>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(htmlHelper)
         {
             this.propertySelector = propertySelector;

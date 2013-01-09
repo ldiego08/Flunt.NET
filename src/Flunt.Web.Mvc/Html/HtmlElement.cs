@@ -1,12 +1,10 @@
 ﻿namespace Flunt.Web.Mvc.Html
 {
-    using System.Web.Mvc;
-
-    public abstract class HtmlElement : HtmlElement<IHtmlHelper>
+    public abstract class HtmlElement : HtmlElement<HtmlHelper>
     {
         #region Constructors
 
-        public HtmlElement(IHtmlHelper htmlHelper)
+        public HtmlElement(HtmlHelper htmlHelper)
             : base(htmlHelper)
         { 
         }

@@ -4,7 +4,7 @@
     {
         #region Properties
 
-        public new IHtmlHelper<TModel> Html { get; set; }
+        public new HtmlHelper<TModel> Html { get; set; }
 
         #endregion
 
@@ -14,7 +14,9 @@
         {
             base.InitHelpers();
 
-            this.Html = new HtmlHelper<TModel>(this.ViewContext, this);
+            var baseHtmlHelper = new System.Web.Mvc.HtmlHelper<TModel>(this.ViewContext, this);
+
+            this.Html = new HtmlHelper<TModel>(baseHtmlHelper);
         }
 
         #endregion

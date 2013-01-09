@@ -2,7 +2,6 @@
 {
     using System;
     using System.Web;
-    using System.Web.Mvc;
     using System.Web.Mvc.Html;
 
     public class ActionLinkHtmlElement : HtmlElement
@@ -21,12 +20,12 @@
 
         #region Contructors
 
-        public ActionLinkHtmlElement(string actionName, string controllerName, IHtmlHelper htmlHelper)
+        public ActionLinkHtmlElement(string actionName, string controllerName, HtmlHelper htmlHelper)
             : base(htmlHelper)
         {
             if (actionName.IsNullOrEmpty())
             {
-                this.actionName = htmlHelper.ViewContext.RouteData.Values["Action"].ToString();
+                this.actionName = htmlHelper.InnerHelper.ViewContext.RouteData.Values["Action"].ToString();
             }
             else
             {
@@ -35,7 +34,7 @@
 
             if (controllerName.IsNullOrEmpty())
             {
-                this.controllerName = htmlHelper.ViewContext.RouteData.Values["Controller"].ToString();
+                this.controllerName = htmlHelper.InnerHelper.ViewContext.RouteData.Values["Controller"].ToString();
             }
             else
             {
@@ -93,24 +92,15 @@
 
             IHtmlString actionLink;
 
-            var htmlHelper = this.HtmlHelper as HtmlHelper;
-
-            if (htmlHelper.IsNotNull())
+            if (routeValues.IsNotNull())
             {
-                if (routeValues.IsNotNull())
-                {
-                    actionLink = htmlHelper.ActionLink(text, actionName, controllerName, routeValues, htmlAttributes);
-                }
-                else
-                {
-                    actionLink = htmlHelper.ActionLink(text, actionName, controllerName, null, htmlAttributes);
-                }
+                actionLink = this.HtmlHelper.InnerHelper.ActionLink(text, actionName, controllerName, routeValues, htmlAttributes);
             }
             else
             {
-                actionLink = MvcHtmlString.Empty;
+                actionLink = this.HtmlHelper.InnerHelper.ActionLink(text, actionName, controllerName, null, htmlAttributes);
             }
-
+            
             return actionLink.ToString();
         }
 

@@ -8,7 +8,7 @@
     {
         #region Constructors
 
-        public CheckBoxInputHtmlElement(Expression<Func<TModel, bool>> propertySelector, IHtmlHelper<TModel> htmlHelper)
+        public CheckBoxInputHtmlElement(Expression<Func<TModel, bool>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
         {
         }
@@ -21,9 +21,8 @@
         {
             var htmlAttributes = this.HtmlAttributes;
             var propertySelector = this.PropertySelector;
-            var htmlHelper = this.HtmlHelper as HtmlHelper<TModel>;
-
-            var checkBoxInput = htmlHelper.CheckBoxFor(propertySelector, htmlAttributes);
+            
+            var checkBoxInput = this.HtmlHelper.InnerHelper.CheckBoxFor(propertySelector, htmlAttributes);
 
             return checkBoxInput.ToString();
         }

@@ -1,9 +1,7 @@
 ﻿namespace Flunt.Web.Mvc.Html
 {
-    using System.Web.Mvc;
-
     public abstract class HtmlBlock<THtmlHelper> : IHtmlBlock<THtmlHelper>
-        where THtmlHelper : IHtmlHelper
+        where THtmlHelper : HtmlHelper
     {
         #region Fields
 

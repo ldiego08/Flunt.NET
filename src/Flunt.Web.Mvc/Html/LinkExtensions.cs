@@ -2,7 +2,7 @@
 {
     public static class LinkExtensions
     {
-        public static ActionLinkHtmlElement LinkForAction(this IHtmlHelper htmlHelper, string action, string inController = null)
+        public static ActionLinkHtmlElement LinkForAction(this HtmlHelper htmlHelper, string action, string inController = null)
         {
             var actionName = action;
             var controllerName = inController;
