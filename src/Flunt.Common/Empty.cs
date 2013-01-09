@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,9 @@ namespace System
             return new TItem[0];
         }
 
-        public static List<TItem> ListOf<TItem>()
+        public static ICollection<TItem> ListOf<TItem>()
         {
-            return new List<TItem>();
+            return new Collection<TItem>();
         }
 
         public static IDictionary<TKey, TValue> DictionaryOf<TKey, TValue>()

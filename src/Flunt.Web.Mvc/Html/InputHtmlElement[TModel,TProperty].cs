@@ -1,37 +1,23 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace Flunt.Web.Mvc.Html
+{
     public abstract class InputHtmlElement<TModel, TProperty> : HtmlElement<TModel, TProperty>
     {
-        #region Constants
-
         public const string DisabledAttributeName = "disabled";
 
         public const string ReadOnlyAttributeName = "readonly";
 
         public const string ViewModePropertyName = "ViewMode";
 
-        #endregion
-
-        #region Fields
-
         private bool skipEditoRules;
-
-        #endregion
-
-        #region Constructor
 
         public InputHtmlElement(Expression<Func<TModel, TProperty>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
         {
             this.skipEditoRules = false;
         }
-
-        #endregion
-
-        #region Properties
 
         public bool IsDisabled
         {
@@ -96,10 +82,6 @@
             }
         }
 
-        #endregion
-
-        #region Methods
-
         public InputHtmlElement<TModel, TProperty> With(bool disabled = false, bool readOnly = false, bool noEditorRules = false, string cssClass = null, string cssStyle = null) 
         {
             base.With(cssClass, cssStyle);
@@ -124,7 +106,5 @@
                 return viewModeIsEdit.Or(viewModeIsCreate).IsFalse();
             }
         } 
-
-        #endregion
     }
 }

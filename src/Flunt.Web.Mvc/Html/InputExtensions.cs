@@ -1,8 +1,8 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace Flunt.Web.Mvc.Html
+{
     public static class InputExtensions
     {
         public static CheckBoxInputHtmlElement<TModel> CheckBoxFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> property)

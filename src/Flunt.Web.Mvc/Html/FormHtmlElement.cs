@@ -7,16 +7,10 @@ namespace Flunt.Web.Mvc.Html
 {
     public class FormHtmlElement : HtmlElement
     {
-        #region Constructors
-
         public FormHtmlElement(HtmlHelper htmlHelper)
             : base(htmlHelper)
         {
         }
-
-        #endregion
-
-        #region Methods
 
         public MvcForm With(string actionName = null, string controllerName = null, object routeValues = null, FormMethod formMethod = FormMethod.Post, string cssClass = null, string cssStyle = null)
         {
@@ -53,7 +47,5 @@ namespace Flunt.Web.Mvc.Html
         {
             return Empty.String;
         } 
-
-        #endregion
     }
 }

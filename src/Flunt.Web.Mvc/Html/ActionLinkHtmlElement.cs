@@ -1,13 +1,12 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Web;
-    using System.Web.Mvc.Html;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Web;
+using System.Web.Mvc.Html;
 
+namespace Flunt.Web.Mvc.Html
+{
     public class ActionLinkHtmlElement : HtmlElement
     {
-        #region Fields
-
         private readonly string actionName;
 
         private readonly string controllerName;
@@ -15,10 +14,6 @@
         private string text;
 
         private object routeValues;
-
-        #endregion
-
-        #region Contructors
 
         public ActionLinkHtmlElement(string actionName, string controllerName, HtmlHelper htmlHelper)
             : base(htmlHelper)
@@ -42,10 +37,6 @@
             }
         }
 
-        #endregion
-
-        #region Properties
-
         public string ActionName
         {
             get { return this.actionName; }
@@ -67,10 +58,6 @@
             get { return this.routeValues; }
             private set { this.routeValues = value; }
         }
-
-        #endregion
-
-        #region Methods
 
         public ActionLinkHtmlElement With(string text = null, object routeValues = null, string cssClass = null, string cssStyle = null)
         {
@@ -103,7 +90,5 @@
             
             return actionLink.ToString();
         }
-
-        #endregion
     }
 }

@@ -1,29 +1,19 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Linq.Expressions;
-    using System.Web.Mvc.Html;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web.Mvc.Html;
 
+namespace Flunt.Web.Mvc.Html
+{
     public class TextAreaInputHtmlElement<TModel, TProperty> : TextInputHtmlElement<TModel, TProperty>
     {
-        #region Constants
-
         public const string RowsAttributeName = "rows";
 
         public const string ColumnsAttributeName = "cols";
-
-        #endregion
-
-        #region Constructors
 
         public TextAreaInputHtmlElement(Expression<Func<TModel, TProperty>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
         {
         }
-
-        #endregion
-
-        #region Properties
 
         public int? Rows
         {
@@ -65,10 +55,6 @@
             }
         }
 
-        #endregion
-
-        #region Methods
-
         public TextAreaInputHtmlElement<TModel, TProperty> With(string format = null, string placeholder = null, int? columns = null, int? rows = null, bool disabled = false, bool readOnly = false, bool noEditorRules = false, string cssClass = null, string cssStyle = null)
         {
             base.With(format, placeholder, disabled, readOnly, noEditorRules, cssClass, cssStyle);
@@ -88,7 +74,5 @@
 
             return textAreaInput.ToString();
         }
-
-        #endregion
     }
 }

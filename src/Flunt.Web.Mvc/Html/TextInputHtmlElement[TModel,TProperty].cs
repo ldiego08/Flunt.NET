@@ -1,34 +1,20 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Linq.Expressions;
-    using System.Web.Mvc.Html;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web.Mvc.Html;
 
+namespace Flunt.Web.Mvc.Html
+{
     public class TextInputHtmlElement<TModel,TProperty> : InputHtmlElement<TModel, TProperty>
     {
-        #region Constants
-
         public const string PlaceholderAttributeName = "placeholder";
 
-        #endregion
-
-        #region Fields
-
         private string format;
-
-        #endregion
-
-        #region Constructors
 
         public TextInputHtmlElement(Expression<Func<TModel, TProperty>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
         {
             this.format = Empty.String;
         }
-
-        #endregion
-
-        #region Properties
 
         public string Placeholder
         {
@@ -70,10 +56,6 @@
             }
         }
 
-        #endregion
-
-        #region Methods
-
         public TextInputHtmlElement<TModel, TProperty> With(string format = null, string placeholder = null, bool disabled = false, bool readOnly = false, bool noEditorRules = false, string cssClass = null, string cssStyle = null)
         {
             base.With(disabled, readOnly, noEditorRules, cssClass, cssStyle);
@@ -94,7 +76,5 @@
 
             return textInput.ToString();
         } 
-
-        #endregion
     }
 }

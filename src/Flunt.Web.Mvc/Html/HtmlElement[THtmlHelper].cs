@@ -1,26 +1,16 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
     
+namespace Flunt.Web.Mvc.Html
+{
     public abstract class HtmlElement<THtmlHelper> : HtmlBlock<THtmlHelper>
         where THtmlHelper : HtmlHelper
     {
-        #region Constants
-
         public const string CssClassAttributeName = "class";
 
         public const string CssStyleAttributeName = "style";
 
-        #endregion
-
-        #region Fields
-
         private readonly IDictionary<string, object> htmlAttributes;
-
-        #endregion
-
-        #region Constructors
 
         public HtmlElement(THtmlHelper htmlHelper)
             : base(htmlHelper)
@@ -28,10 +18,6 @@
             this.htmlAttributes = Empty.DictionaryOf<string, object>();
             this.InitializeHtmlAttributes();
         }
-
-        #endregion
-
-        #region Properties
 
         public string CssClass
         {
@@ -76,10 +62,6 @@
             get { return this.htmlAttributes; }
         }
 
-        #endregion
-
-        #region Methods
-
         public HtmlElement<THtmlHelper> With(string cssClass = null, string cssStyle = null)
         {
             this.CssClass = cssClass;
@@ -91,7 +73,5 @@
         protected virtual void InitializeHtmlAttributes()
         {
         }
-
-        #endregion
     }
 }

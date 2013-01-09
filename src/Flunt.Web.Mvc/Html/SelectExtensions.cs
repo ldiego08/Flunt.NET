@@ -1,9 +1,9 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
+namespace Flunt.Web.Mvc.Html
+{
     public static class SelectExtensions
     {
         public static DropDownListHtmlElement<TModel, TProperty, TItem> DropDownListFor<TModel, TProperty, TItem>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property, IEnumerable<TItem> withItems)

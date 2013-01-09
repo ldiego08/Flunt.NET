@@ -1,8 +1,8 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace Flunt.Web.Mvc.Html
+{
     public static class LabelExtensions
     {
         public static LabelHtmlElement<TModel, TProperty> LabelFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)

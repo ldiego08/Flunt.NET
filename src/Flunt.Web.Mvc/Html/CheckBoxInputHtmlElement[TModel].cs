@@ -1,21 +1,15 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Linq.Expressions;
-    using System.Web.Mvc.Html;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web.Mvc.Html;
 
+namespace Flunt.Web.Mvc.Html
+{
     public class CheckBoxInputHtmlElement<TModel> : InputHtmlElement<TModel, bool>
     {
-        #region Constructors
-
         public CheckBoxInputHtmlElement(Expression<Func<TModel, bool>> propertySelector, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
         {
         }
-
-        #endregion
-
-        #region Methods
 
         public override string ToHtmlString()
         {
@@ -26,7 +20,5 @@
 
             return checkBoxInput.ToString();
         }
-
-        #endregion
     }
 }

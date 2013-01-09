@@ -1,23 +1,17 @@
-﻿namespace Flunt.Web.Mvc.Html
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Web.Mvc.Html;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Web.Mvc.Html;
 
+namespace Flunt.Web.Mvc.Html
+{
     public class DropDownListHtmlElement<TModel, TProperty, TItem> : InputHtmlElement<TModel, TProperty>
     {
-        #region Fields
-
         private IEnumerable<TItem> items;
 
         private Expression<Func<TItem, object>> textPropertySelector;
 
         private Expression<Func<TItem, object>> valuePropertySelector;
-
-        #endregion
-
-        #region Constructor
 
         public DropDownListHtmlElement(Expression<Func<TModel, TProperty>> propertySelector, IEnumerable<TItem> items, HtmlHelper<TModel> htmlHelper)
             : base(propertySelector, htmlHelper)
@@ -25,19 +19,11 @@
             this.items = items;
         }
 
-        #endregion
-
-        #region Properties
-
         public IEnumerable<TItem> Items
         {
             get { return this.items; }
             private set { this.items = value; }
         }
-
-        #endregion
-
-        #region Methods
 
         public DropDownListHtmlElement<TModel, TProperty, TItem> With(Expression<Func<TItem, object>> text, Expression<Func<TItem, object>> value, bool disabled = false, bool readOnly = false, bool noEditorRules = false, string cssClass = null, string cssStyle = null)
         {
@@ -129,7 +115,5 @@
             this.textPropertySelector = keyPropertySelector;
             this.valuePropertySelector = valuePropertySelector;
         }
-
-        #endregion
     }
 }

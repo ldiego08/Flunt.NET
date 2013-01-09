@@ -1,25 +1,34 @@
-﻿namespace System
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System
 {
     public static class TypeExtensions
     {
-        public static bool IsDerivedOfGenericType(this object source, Type genericType)
+        public static bool IsDerivedOfGenericType(this object source, Type expectedType)
         {
-            var currentType = genericType;
-            var sourceType = source.GetType();
-
-            while (currentType.IsNotNull().And(currentType.IsDifferentTo(typeof(object))))
+            if (source.IsNotNull())
             {
-                var currentGenericType = currentType.IsGenericType ? currentType.GetGenericTypeDefinition() : currentType;
+                var currentType = expectedType;
+                var sourceType = source.GetType();
 
-                if (currentGenericType.IsEqualTo(sourceType))
+                while (currentType.IsNotNull().And(currentType.IsDifferentTo(typeof(object))))
                 {
-                    return true;
+                    var currentGenericType = currentType.IsGenericType ? currentType.GetGenericTypeDefinition() : currentType;
+
+                    if (currentGenericType.IsEqualTo(sourceType))
+                    {
+                        return true;
+                    }
+
+                    currentType = currentType.BaseType;
                 }
 
-                currentType = currentType.BaseType;
+                return false;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
     }
 }
