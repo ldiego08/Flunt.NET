@@ -24,9 +24,9 @@ namespace System
             return new TItem[0];
         }
 
-        public static ICollection<TItem> ListOf<TItem>()
+        public static IList<TItem> ListOf<TItem>()
         {
-            return new Collection<TItem>();
+            return new List<TItem>();
         }
 
         public static IDictionary<TKey, TValue> DictionaryOf<TKey, TValue>()
