@@ -1,4 +1,7 @@
-﻿namespace System
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace System
 {
     public static class ComparisonExtensions
     {
@@ -71,6 +74,23 @@
         public static bool IsNotNullOrWhiteSpace(this string value)
         {
             return value.IsNullOrWhiteSpace().IsFalse();
+        }
+
+        public static bool IsEmpty<TItem>(this IEnumerable<TItem> value)
+        {
+            if (value.IsNotNull())
+            {
+                return value.Count().IsEqualTo(0);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public static bool IsNotEmpty<TItem>(this IEnumerable<TItem> value)
+        {
+            return value.IsEmpty().IsFalse();
         }
     }
 }
