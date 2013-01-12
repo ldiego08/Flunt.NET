@@ -82,7 +82,7 @@
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\ExpressionDisplayHtmlBlock.cs" />
     <Compile Include="Html\ExpressionDisplayHtmlBlock`1.cs" />
-    <Compile Include="Html\DisplayHtmlBlock.cs" />
+    <Compile Include="Html\ModelDisplayHtmlBlock`1.cs" />
     <Compile Include="Html\NameExtensions.cs" />
     <Compile Include="Html\PartialExtensions.cs" />
     <Compile Include="Html\DropDownListHtmlElement`1.cs" />
