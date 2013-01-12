@@ -22,7 +22,7 @@ namespace Flunt.Web.Mvc.Html
         /// <param name="htmlHelper">The helper used to render HTML.</param>
         /// <param name="name">The name to use for the identifier.</param>
         /// <returns>The resolved unique HTML identifier.</returns>
-        public static MvcHtmlString Id(this HtmlHelper htmlHelper, string name)
+        public static MvcHtmlString IdFor(this HtmlHelper htmlHelper, string name)
         {
             return htmlHelper.InnerHelper.Id(name);
         }
@@ -56,7 +56,7 @@ namespace Flunt.Web.Mvc.Html
         /// <param name="htmlHelper">The helper used to render HTML.</param>
         /// <param name="name">The name to use for the identifier.</param>
         /// <returns>The resolved unique HTML name.</returns>
-        public static MvcHtmlString Name(this HtmlHelper htmlHelper, string name)
+        public static MvcHtmlString NameFor(this HtmlHelper htmlHelper, string name)
         {
             return htmlHelper.InnerHelper.Name(name);
         }
