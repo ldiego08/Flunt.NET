@@ -77,8 +77,8 @@ to create robust custom helpers with fluent declaration support.
 The HTML framework classes are located under the <code>Flunt.Web.Mvc.Html</code> namespace. You can always 
 extend any of these classes to create custom HTML content. Built-in base classes are:
 
-*<code>HtmlBlock</code>: 	Extend to create a custom renderer that will output an HTML markup block.
-*<code>HtmlElement</code>: 	Extend to create a custom renderer that will output an HTML element with optional
+*	HtmlBlock: 		Extend to create a custom renderer that will output an HTML markup block.
+*	HtmlElement: 	Extend to create a custom renderer that will output an HTML element with optional
 							children elements.
-*<code>HtmlInput</code>:	Extend to create a custom renderer that will output an HTML input element to be
+*	HtmlInput:		Extend to create a custom renderer that will output an HTML input element to be
 							used in a form.
