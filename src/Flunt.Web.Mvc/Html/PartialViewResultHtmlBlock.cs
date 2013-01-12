@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PartialViewHtmlBlock.cs" company="Conturenet">
+// <copyright file="PartialViewResultHtmlBlock.cs" company="Conturenet">
 //     Copyright (c) Conturenet Technologies. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Flunt.Web.Mvc.Html
     /// <summary>
     /// Represents a partial view to be rendered in a view.
     /// </summary>
-    public class PartialViewHtmlBlock : HtmlBlock<Flunt.Web.Mvc.HtmlHelper>
+    public class PartialViewResultHtmlBlock : HtmlBlock<Flunt.Web.Mvc.HtmlHelper>
     {
         /// <summary>
         /// The name of the partial view to render.
@@ -30,15 +30,16 @@ namespace Flunt.Web.Mvc.Html
         private ViewDataDictionary viewData;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PartialViewHtmlBlock"/> class.
+        /// Initializes a new instance of the <see cref="PartialViewResultHtmlBlock"/> class.
         /// </summary>
         /// <param name="partialViewName">The name of the partial view to render.</param>
         /// <param name="htmlHelper">The helper used to render HTML.</param>
-        public PartialViewHtmlBlock(string partialViewName, Flunt.Web.Mvc.HtmlHelper htmlHelper)
+        public PartialViewResultHtmlBlock(string partialViewName, Flunt.Web.Mvc.HtmlHelper htmlHelper)
             : base(htmlHelper)
         {
             this.model = null;
             this.partialViewName = partialViewName;
+            this.viewData = htmlHelper.InnerHelper.ViewData;
         }
 
         /// <summary>
@@ -64,8 +65,8 @@ namespace Flunt.Web.Mvc.Html
         /// </summary>
         /// <param name="model">The model used by the partial view.</param>
         /// <param name="viewData">The view data used by the partial view.</param>
-        /// <returns>The <see cref="PartialViewHtmlBlock"/> instance.</returns>
-        public PartialViewHtmlBlock With(object model = null, ViewDataDictionary viewData = null)
+        /// <returns>The <see cref="PartialViewResultHtmlBlock"/> instance.</returns>
+        public PartialViewResultHtmlBlock With(object model = null, ViewDataDictionary viewData = null)
         {
             this.Model = model;
             this.viewData = viewData;
@@ -79,11 +80,12 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var model = this.Model;
-            var viewData = this.ViewData;
-            var partialViewName = this.partialViewName;
-
-            var partialView = this.HtmlHelper.InnerHelper.Partial(partialViewName, model, viewData);
+            var partialView = this.HtmlHelper
+                                  .InnerHelper
+                                       .Partial(
+                                            partialViewName: this.partialViewName, 
+                                            model: this.Model, 
+                                            viewData: this.ViewData);
 
             return partialView.ToString();
         }

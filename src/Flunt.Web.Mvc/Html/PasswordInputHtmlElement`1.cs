@@ -33,10 +33,11 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var propertySelector = this.PropertySelector;
-            var htmlAttributes = this.HtmlAttributes;
-
-            var passwordInput = this.HtmlHelper.InnerHelper.PasswordFor(propertySelector, htmlAttributes);
+            var passwordInput = this.HtmlHelper
+                                    .InnerHelper
+                                           .PasswordFor(
+                                                expression: this.PropertySelector,
+                                                htmlAttributes: this.HtmlAttributes);
 
             return passwordInput.ToString();
         }

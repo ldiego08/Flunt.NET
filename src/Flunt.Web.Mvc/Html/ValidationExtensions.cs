@@ -24,8 +24,7 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="ValidationMessageHtmlElement{TModel,TProperty}"/> instance that renders the element.</returns>
         public static ValidationMessageHtmlElement<TModel, TProperty> ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)
         {
-            var propertySelector = property;
-            var validationMessage = new ValidationMessageHtmlElement<TModel, TProperty>(propertySelector, htmlHelper);
+            var validationMessage = new ValidationMessageHtmlElement<TModel, TProperty>(property, htmlHelper);
 
             return validationMessage;
         }

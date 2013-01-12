@@ -12,7 +12,7 @@ namespace Flunt.Web.Mvc.Html
     public static class LinkExtensions
     {
         /// <summary>
-        /// Returns an anchor HTML element renderer optionally targeting a different action or controller.
+        /// Returns an anchor HTML element renderer for an action optionally located in another controller.
         /// </summary>
         /// <param name="htmlHelper">The helper used to render HTML.</param>
         /// <param name="action">The name of the target action.</param>
@@ -20,10 +20,21 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="ActionLinkHtmlElement"/> instance that renders the element.</returns>
         public static ActionLinkHtmlElement LinkForAction(this HtmlHelper htmlHelper, string action, string inController = null)
         {
-            var actionName = action;
-            var controllerName = inController;
+            return new ActionLinkHtmlElement(
+                actionName:     action, 
+                controllerName: inController, 
+                htmlHelper:     htmlHelper);
+        }
 
-            return new ActionLinkHtmlElement(actionName, controllerName, htmlHelper);
+        /// <summary>
+        /// Returns an anchor HTML element renderer for a mapped route.
+        /// </summary>
+        /// <param name="htmlHelper">The helper used to render HTML.</param>
+        /// <param name="route">The name of the target route.</param>
+        /// <returns>A <see cref="RouteLinkHtmlElement"/> instance that renders the element.</returns>
+        public static RouteLinkHtmlElement LinkForRoute(this HtmlHelper htmlHelper, string route)
+        {
+            return new RouteLinkHtmlElement(route, htmlHelper);
         }
     }
 }

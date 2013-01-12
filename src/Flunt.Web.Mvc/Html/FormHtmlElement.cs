@@ -56,19 +56,14 @@ namespace Flunt.Web.Mvc.Html
             }
 
             var htmlAttributes = this.HtmlAttributes;
-            var safeRouteValues = new RouteValueDictionary(routeValues.OrIfIsNull(Empty.Dynamic));
+            var safeRouteValues = new RouteValueDictionary(routeValues);
 
             MvcForm form;
 
-            if (routeValues.IsNotNull())
-            {
-                form = this.HtmlHelper.InnerHelper.BeginForm(actionName, controllerName, safeRouteValues, formMethod, htmlAttributes);
-            }
-            else
-            {
-                form = this.HtmlHelper.InnerHelper.BeginForm(actionName, controllerName, null, formMethod, htmlAttributes);
-            }
-
+            form = this.HtmlHelper
+                       .InnerHelper
+                            .BeginForm(actionName, controllerName, safeRouteValues, formMethod, htmlAttributes);
+            
             return form;
         }
 

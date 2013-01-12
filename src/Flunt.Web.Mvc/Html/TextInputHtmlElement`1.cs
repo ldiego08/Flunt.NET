@@ -111,11 +111,12 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var format = this.Format;
-            var selector = this.PropertySelector;
-            var htmlAttributes = this.HtmlAttributes;
-
-            var textInput = this.HtmlHelper.InnerHelper.TextBoxFor(selector, format, htmlAttributes);
+            var textInput = this.HtmlHelper
+                                .InnerHelper
+                                     .TextBoxFor(
+                                          format: this.Format,
+                                          expression: this.PropertySelector,
+                                          htmlAttributes: this.HtmlAttributes);
 
             return textInput.ToString();
         } 

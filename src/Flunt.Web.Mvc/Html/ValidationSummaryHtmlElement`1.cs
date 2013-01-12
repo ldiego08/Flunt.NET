@@ -96,11 +96,12 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var title = this.Title;
-            var htmlAttributes = this.HtmlAttributes;
-            var skipPropertyErrors = this.SkipPropertyErrors;
-
-            var validationSummary = this.HtmlHelper.InnerHelper.ValidationSummary(skipPropertyErrors, title, htmlAttributes);
+            var validationSummary = this.HtmlHelper
+                                        .InnerHelper
+                                             .ValidationSummary(
+                                                message: this.Title,
+                                                htmlAttributes: this.HtmlAttributes,
+                                                excludePropertyErrors: this.SkipPropertyErrors);
 
             if (validationSummary.IsNotNull())
             {
