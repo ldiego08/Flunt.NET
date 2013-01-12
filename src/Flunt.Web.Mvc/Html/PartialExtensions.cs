@@ -4,6 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
+
 namespace Flunt.Web.Mvc.Html
 {
     /// <summary>
@@ -16,10 +19,31 @@ namespace Flunt.Web.Mvc.Html
         /// </summary>
         /// <param name="htmlHelper">The helper used to render HTML.</param>
         /// <param name="partialViewName">The name of the partial view to render.</param>
-        /// <returns>A <see cref="PartialViewHtmlBlock"/> instance that renders the partial view.</returns>
-        public static PartialViewHtmlBlock PartialView(this HtmlHelper htmlHelper, string partialViewName)
+        /// <returns>A <see cref="PartialViewResultHtmlBlock"/> instance that renders the partial view.</returns>
+        public static PartialViewResultHtmlBlock ForPartialView(this HtmlHelper htmlHelper, string partialViewName)
         {
-            return new PartialViewHtmlBlock(partialViewName, htmlHelper);
+            return new PartialViewResultHtmlBlock(partialViewName, htmlHelper);
+        }
+
+        /// <summary>
+        /// Renders the specified partial view directly to the view context HTML writer optionally using the 
+        /// specified model and view data.
+        /// </summary>
+        /// <param name="htmlHelper">The helper used to render HTML.</param>
+        /// <param name="partialViewName">The name of the partial view.</param>
+        /// <param name="withModel">The model for the partial view.</param>
+        /// <param name="withViewData">The view data for the partial view.</param>
+        public static void RenderPartialView(
+            this HtmlHelper htmlHelper, 
+            string partialViewName, 
+            object withModel = null, 
+            ViewDataDictionary withViewData = null)
+        {
+            htmlHelper.InnerHelper
+                           .RenderPartial(
+                                partialViewName, 
+                                model: withModel, 
+                                viewData: withViewData);
         }
     }
 }

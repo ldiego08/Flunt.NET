@@ -33,10 +33,11 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var propertySelector = this.PropertySelector;
-            var htmlAttributes = this.HtmlAttributes;
-
-            var label = this.HtmlHelper.InnerHelper.LabelFor(propertySelector, htmlAttributes);
+            var label = this.HtmlHelper
+                            .InnerHelper
+                                .LabelFor(
+                                    expression: this.PropertySelector, 
+                                    htmlAttributes: this.HtmlAttributes);
 
             return label.ToString();
         }

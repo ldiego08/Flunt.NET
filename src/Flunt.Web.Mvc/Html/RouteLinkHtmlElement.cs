@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ActionLinkHtmlElement.cs" company="Conturenet">
+// <copyright file="RouteLinkHtmlElement.cs" company="Conturenet">
 //     Copyright (c) Conturenet Technologies. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -12,19 +12,14 @@ using System.Web.Routing;
 namespace Flunt.Web.Mvc.Html
 {
     /// <summary>
-    /// Represents an anchor HTML element targeting a controller action to be rendered in a view.
+    /// Represents an anchor HTML element targeting a mapped route to be rendered in a view.
     /// </summary>
-    public class ActionLinkHtmlElement : HtmlElement
+    public class RouteLinkHtmlElement : HtmlElement
     {
         /// <summary>
-        /// The name of the target action.
+        /// The name of the target route.
         /// </summary>
-        private readonly string actionName;
-
-        /// <summary>
-        /// The name of the target controller.
-        /// </summary>
-        private readonly string controllerName;
+        private readonly string routeName;
 
         /// <summary>
         /// The text displayed in the anchor element.
@@ -52,47 +47,27 @@ namespace Flunt.Web.Mvc.Html
         private RouteValueDictionary routeValues;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActionLinkHtmlElement"/> class.
+        /// Initializes a new instance of the <see cref="RouteLinkHtmlElement"/> class.
         /// </summary>
-        /// <param name="actionName">The name of the target action.</param>
-        /// <param name="controllerName">The name of the target controller.</param>
+        /// <param name="routeName">The name of the target route.</param>
         /// <param name="htmlHelper">The helper used to render HTML.</param>
-        public ActionLinkHtmlElement(string actionName, string controllerName, HtmlHelper htmlHelper)
+        public RouteLinkHtmlElement(string routeName, HtmlHelper htmlHelper)
             : base(htmlHelper)
         {
-            if (actionName.IsNullOrEmpty())
+            if (routeName.IsNullOrEmpty())
             {
-                this.actionName = htmlHelper.InnerHelper.ViewContext.RouteData.Values["Action"].ToString();
-            }
-            else
-            {
-                this.actionName = actionName;
+                throw new ArgumentException("Route name cannot be null or empty.", "routeName");
             }
 
-            if (controllerName.IsNullOrEmpty())
-            {
-                this.controllerName = htmlHelper.InnerHelper.ViewContext.RouteData.Values["Controller"].ToString();
-            }
-            else
-            {
-                this.controllerName = controllerName;
-            }
+            this.routeName = routeName;
         }
 
         /// <summary>
-        /// Gets the name of the target action.
+        /// Gets the name of the target route.
         /// </summary>
-        public string ActionName
+        public string RouteName
         {
-            get { return this.actionName; }
-        }
-
-        /// <summary>
-        /// Gets the name of the target controller.
-        /// </summary>
-        public string ControllerName
-        {
-            get { return this.controllerName; }
+            get { return this.routeName; }
         }
 
         /// <summary>
@@ -151,13 +126,13 @@ namespace Flunt.Web.Mvc.Html
         /// <param name="cssClass">The element class.</param>
         /// <param name="cssStyle">The element style.</param>
         /// <returns>The <see cref="ActionLinkHtmlElement"/> instance.</returns>
-        public ActionLinkHtmlElement With(
-            string text = null, 
+        public RouteLinkHtmlElement With(
+            string text = null,
             string protocol = null,
             string fragment = null,
             string hostName = null,
-            object routeValues = null, 
-            string cssClass = null, 
+            object routeValues = null,
+            string cssClass = null,
             string cssStyle = null)
         {
             base.With(cssClass, cssStyle);
@@ -185,35 +160,35 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            IHtmlString actionLink;
+            var routeValues = new RouteValueDictionary(this.RouteValues);
+
+            IHtmlString routeLink;
 
             if (this.Protocol.IsNullOrEmpty().Or(this.HostName.IsNullOrEmpty()).Or(this.Fragment.IsNullOrEmpty()))
             {
-                actionLink = this.HtmlHelper
-                                 .InnerHelper
-                                     .ActionLink(
-                                        linkText:       this.Text, 
-                                        actionName:     this.ActionName, 
-                                        controllerName: this.ControllerName, 
-                                        routeValues:    this.RouteValues, 
+                routeLink = this.HtmlHelper
+                                .InnerHelper
+                                     .RouteLink(
+                                        linkText: this.Text, 
+                                        routeName: this.RouteName, 
+                                        routeValues: this.RouteValues, 
                                         htmlAttributes: this.HtmlAttributes);
             }
             else
             {
-                actionLink = this.HtmlHelper
-                                 .InnerHelper
-                                     .ActionLink(
-                                        linkText:       this.Text, 
-                                        actionName:     this.ActionName, 
-                                        controllerName: this.ControllerName, 
-                                        protocol:       this.Protocol, 
-                                        hostName:       this.HostName, 
-                                        fragment:       this.Fragment, 
-                                        routeValues:    this.RouteValues, 
+                routeLink = this.HtmlHelper
+                                .InnerHelper
+                                     .RouteLink(
+                                        linkText: this.Text, 
+                                        routeName: this.RouteName, 
+                                        protocol: this.Protocol, 
+                                        hostName: this.HostName, 
+                                        fragment: this.Fragment, 
+                                        routeValues: this.RouteValues, 
                                         htmlAttributes: this.HtmlAttributes);
             }
-            
-            return actionLink.ToString();
+
+            return routeLink.ToString();
         }
     }
 }

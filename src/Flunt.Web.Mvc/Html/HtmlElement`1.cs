@@ -49,7 +49,14 @@ namespace Flunt.Web.Mvc.Html
         {
             get 
             {
-                return this.HtmlAttributes[CssClassAttributeName] as string; 
+                if (this.HtmlAttributes.ContainsKey(CssClassAttributeName))
+                {
+                    return this.HtmlAttributes[CssClassAttributeName] as string;
+                }
+                else
+                {
+                    return null;
+                }
             }
 
             private set
@@ -72,7 +79,14 @@ namespace Flunt.Web.Mvc.Html
         {
             get
             {
-                return this.HtmlAttributes[CssStyleAttributeName] as string;
+                if (this.HtmlAttributes.ContainsKey(CssStyleAttributeName))
+                {
+                    return this.HtmlAttributes[CssStyleAttributeName] as string;
+                }
+                else
+                {
+                    return null;
+                }
             }
 
             private set
@@ -84,6 +98,42 @@ namespace Flunt.Web.Mvc.Html
                 else
                 {
                     this.HtmlAttributes.Remove(CssStyleAttributeName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a valid HTML attribute for the element CSS style.
+        /// </summary>
+        protected string CssStyleAttribute
+        {
+            get
+            {
+                if (this.CssStyle.IsNotNullOrEmpty())
+                {
+                    return string.Format(@"style=""{0}""", this.CssStyle);
+                }
+                else
+                {
+                    return Empty.String;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a valid HTML attribute for the element CSS class.
+        /// </summary>
+        protected string CssClassAttribute
+        {
+            get
+            {
+                if (this.CssClass.IsNotNullOrEmpty())
+                {
+                    return string.Format(@"class=""{0}""", this.CssClass);
+                }
+                else
+                {
+                    return Empty.String;
                 }
             }
         }
