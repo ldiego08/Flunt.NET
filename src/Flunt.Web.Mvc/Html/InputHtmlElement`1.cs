@@ -131,7 +131,12 @@ namespace Flunt.Web.Mvc.Html
         /// <param name="cssClass">The class of the element.</param>
         /// <param name="cssStyle">The style of the element.</param>
         /// <returns>The <see cref="InputHtmlElement{TModel,TProperty,TItem}"/> instance.</returns>
-        public InputHtmlElement<TModel, TProperty> With(bool disabled = false, bool readOnly = false, bool noEditorRules = false, string cssClass = null, string cssStyle = null) 
+        public InputHtmlElement<TModel, TProperty> With(
+            bool disabled = false, 
+            bool readOnly = false, 
+            bool noEditorRules = false, 
+            string cssClass = null, 
+            string cssStyle = null) 
         {
             base.With(cssClass, cssStyle);
 

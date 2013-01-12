@@ -32,10 +32,11 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var htmlAttributes = this.HtmlAttributes;
-            var propertySelector = this.PropertySelector;
-            
-            var checkBoxInput = this.HtmlHelper.InnerHelper.CheckBoxFor(propertySelector, htmlAttributes);
+            var checkBoxInput = this.HtmlHelper
+                                    .InnerHelper
+                                         .CheckBoxFor(
+                                             expression: this.PropertySelector,
+                                             htmlAttributes: this.HtmlAttributes);
 
             return checkBoxInput.ToString();
         }

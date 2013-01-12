@@ -92,11 +92,12 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var templateName = this.TemplateName;
-            var htmlFieldName = this.HtmlFieldName;
-            var additionalViewData = this.AdditionalViewData;
-
-            var display = this.HtmlHelper.InnerHelper.DisplayForModel(templateName, htmlFieldName, additionalViewData);
+            var display = this.HtmlHelper
+                              .InnerHelper
+                                   .DisplayForModel(
+                                        templateName: this.TemplateName, 
+                                        htmlFieldName: this.HtmlFieldName, 
+                                        additionalViewData: this.AdditionalViewData);
 
             return display.ToString();
         }

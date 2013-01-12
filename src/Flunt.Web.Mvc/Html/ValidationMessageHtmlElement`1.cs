@@ -64,11 +64,12 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var propertySelector = this.PropertySelector;
-            var message = this.Message;
-            var htmlAttributes = this.HtmlAttributes;
-
-            var validationMessage = this.HtmlHelper.InnerHelper.ValidationMessageFor(propertySelector, message, htmlAttributes);
+            var validationMessage = this.HtmlHelper
+                                        .InnerHelper
+                                             .ValidationMessageFor(
+                                                  expression: this.PropertySelector,
+                                                  validationMessage: this.Message,
+                                                  htmlAttributes: this.HtmlAttributes);
 
             return validationMessage.ToString();
         }

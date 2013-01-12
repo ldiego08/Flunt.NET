@@ -39,9 +39,7 @@ namespace Flunt.Web.Mvc.Html
         /// </returns>
         public static ExpressionDisplayHtmlBlock<TModel, TProperty> DisplayFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)
         {
-            var propertySelector = property;
-
-            return new ExpressionDisplayHtmlBlock<TModel, TProperty>(propertySelector, htmlHelper);
+            return new ExpressionDisplayHtmlBlock<TModel, TProperty>(property, htmlHelper);
         }
 
         /// <summary>

@@ -31,10 +31,10 @@ namespace Flunt.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> property, 
             IEnumerable<TItem> withItems)
         {
-            var items = withItems;
-            var propertySelector = property;
-
-            return new DropDownListHtmlElement<TModel, TProperty, TItem>(propertySelector, items, htmlHelper);
+            return new DropDownListHtmlElement<TModel, TProperty, TItem>(
+                propertySelector: property,
+                items: withItems,
+                htmlHelper: htmlHelper);
         }
 
         /// <summary>
@@ -54,10 +54,10 @@ namespace Flunt.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> property, 
             IDictionary<TKey, TValue> withItems)
         {
-            var items = withItems;
-            var propertySelector = property;
-
-            return new DropDownListHtmlElement<TModel, TProperty, KeyValuePair<TKey, TValue>>(propertySelector, items, htmlHelper);
+            return new DropDownListHtmlElement<TModel, TProperty, KeyValuePair<TKey, TValue>>(
+                propertySelector: property,
+                items: withItems,
+                htmlHelper: htmlHelper);
         }
     }
 }

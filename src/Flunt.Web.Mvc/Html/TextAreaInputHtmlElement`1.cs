@@ -121,10 +121,11 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>An HTML-encoded string.</returns>
         public override string ToHtmlString()
         {
-            var propertySelector = this.PropertySelector;
-            var htmlAttributes = this.HtmlAttributes;
-
-            var textAreaInput = this.HtmlHelper.InnerHelper.TextAreaFor(propertySelector, htmlAttributes);
+            var textAreaInput = this.HtmlHelper
+                                    .InnerHelper
+                                         .TextAreaFor(
+                                              expression: this.PropertySelector, 
+                                              htmlAttributes: this.HtmlAttributes);
 
             return textAreaInput.ToString();
         }

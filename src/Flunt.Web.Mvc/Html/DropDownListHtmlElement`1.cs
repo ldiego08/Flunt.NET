@@ -94,10 +94,13 @@ namespace Flunt.Web.Mvc.Html
             if (htmlHelper.IsNotNull())
             {
                 var selectList = this.GetSelectList();
-                var htmlAttributes = this.HtmlAttributes;
-                var propertySelector = this.PropertySelector;
                 
-                var dropDownList = this.HtmlHelper.InnerHelper.DropDownListFor(propertySelector, selectList, htmlAttributes);
+                var dropDownList = this.HtmlHelper
+                                       .InnerHelper
+                                            .DropDownListFor(
+                                                selectList: selectList,
+                                                expression: this.PropertySelector,
+                                                htmlAttributes: this.HtmlAttributes);
 
                 return dropDownList.ToString();
             }

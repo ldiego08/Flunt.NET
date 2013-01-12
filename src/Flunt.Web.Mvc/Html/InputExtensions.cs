@@ -23,8 +23,7 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="CheckBoxInputHtmlElement{TModel}"/> instance that renders the element.</returns>
         public static CheckBoxInputHtmlElement<TModel> CheckBoxFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> property)
         {
-            var propertySelector = property;
-            var checkBox = new CheckBoxInputHtmlElement<TModel>(propertySelector, htmlHelper);
+            var checkBox = new CheckBoxInputHtmlElement<TModel>(property, htmlHelper);
 
             return checkBox;
         }
@@ -39,8 +38,7 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="TextInputHtmlElement{TModel,TProperty}"/> instance that renders the element.</returns>
         public static TextInputHtmlElement<TModel, TProperty> TextBoxFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)
         {
-            var propertySelector = property;
-            var textBox = new TextInputHtmlElement<TModel, TProperty>(propertySelector, htmlHelper);
+            var textBox = new TextInputHtmlElement<TModel, TProperty>(property, htmlHelper);
 
             return textBox;
         }
@@ -55,8 +53,7 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="PasswordInputHtmlElement{TModel,TProperty}"/> instance that renders the element.</returns>
         public static PasswordInputHtmlElement<TModel, TProperty> PasswordTextBoxFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)
         {
-            var propertySelector = property;
-            var passwordTextBox = new PasswordInputHtmlElement<TModel, TProperty>(propertySelector, htmlHelper);
+            var passwordTextBox = new PasswordInputHtmlElement<TModel, TProperty>(property, htmlHelper);
 
             return passwordTextBox;
         }
@@ -71,8 +68,7 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="TextAreaInputHtmlElement{TModel,TProperty}"/> instance that renders the element.</returns>
         public static TextAreaInputHtmlElement<TModel, TProperty> TextAreaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)
         {
-            var propertySelector = property;
-            var textArea = new TextAreaInputHtmlElement<TModel, TProperty>(propertySelector, htmlHelper);
+            var textArea = new TextAreaInputHtmlElement<TModel, TProperty>(property, htmlHelper);
 
             return textArea;
         }

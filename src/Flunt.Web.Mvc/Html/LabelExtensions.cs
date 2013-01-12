@@ -24,9 +24,7 @@ namespace Flunt.Web.Mvc.Html
         /// <returns>A <see cref="LabelHtmlElement{TModel,TProperty}"/> instance that renders the element.</returns>
         public static LabelHtmlElement<TModel, TProperty> LabelFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> property)
         {
-            var propertySelector = property;
-
-            return new LabelHtmlElement<TModel, TProperty>(propertySelector, htmlHelper);
+            return new LabelHtmlElement<TModel, TProperty>(property, htmlHelper);
         }
     }
 }
