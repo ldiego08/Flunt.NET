@@ -1,8 +1,17 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="DisplayExtensions.cs" company="Conturenet">
+//     Copyright (c) Conturenet Technologies. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using System.Linq.Expressions;
 
 namespace Flunt.Web.Mvc.Html
 {
+    /// <summary>
+    /// Extends the <see cref="HtmlHelper"/> and <see cref="HtmlHelper{TModel}"/> classes with additional methods to render view data and model values.
+    /// </summary>
     public static class DisplayExtensions
     {
         /// <summary>

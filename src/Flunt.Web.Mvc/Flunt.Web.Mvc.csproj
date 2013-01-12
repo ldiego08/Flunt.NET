@@ -78,7 +78,6 @@
     <Compile Include="HtmlHelper`1.cs" />
     <Compile Include="Html\ActionLinkHtmlElement.cs" />
     <Compile Include="Html\CheckBoxInputHtmlElement`1.cs" />
-    <Compile Include="Html\ChildActionExtensions.cs" />
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\ExpressionDisplayHtmlBlock.cs" />
     <Compile Include="Html\ExpressionDisplayHtmlBlock`1.cs" />
